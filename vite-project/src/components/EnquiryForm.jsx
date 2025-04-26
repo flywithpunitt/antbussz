@@ -289,7 +289,7 @@ const EnquiryForm = ({ isOpen, onClose }) => {
         </div>
 
         {/* Scrollable Content */}
-        <div className="flex-1 overflow-y-auto p-8 pt-0">
+        <div className="flex-1 overflow-y-auto p-8 pt-0 hide-scrollbar">
           <div className="mt-8">
             <div className="flex justify-between items-center text-sm mb-2">
               <div className="flex items-center gap-2">
@@ -830,6 +830,16 @@ const EnquiryForm = ({ isOpen, onClose }) => {
 
           .animate-expandDown {
             animation: expandDown 0.2s ease-out forwards;
+          }
+
+          /* Hide scrollbar but keep functionality */
+          .hide-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;     /* Firefox */
+          }
+          
+          .hide-scrollbar::-webkit-scrollbar {
+            display: none;             /* Chrome, Safari and Opera */
           }
         `}
       </style>
