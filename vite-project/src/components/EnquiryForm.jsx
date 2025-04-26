@@ -236,8 +236,9 @@ const EnquiryForm = ({ isOpen, onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[9999] backdrop-blur-sm">
-      <div className="bg-white rounded-3xl w-full max-w-2xl mx-4 animate-scaleUp overflow-hidden">
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[9999] backdrop-blur-sm overflow-hidden">
+      <div className="bg-white rounded-3xl w-full max-w-2xl mx-4 animate-scaleUp max-h-[90vh] flex flex-col">
+        {/* Header - Fixed */}
         <div className="relative">
           {/* Header Pattern */}
           <div className="absolute inset-0 bg-gradient-to-r from-[#FF5722]/5 to-[#3B4B96]/5">
@@ -287,8 +288,8 @@ const EnquiryForm = ({ isOpen, onClose }) => {
           </div>
         </div>
 
-        {/* Rest of your form content */}
-        <div className="p-8 pt-0">
+        {/* Scrollable Content */}
+        <div className="flex-1 overflow-y-auto p-8 pt-0">
           <div className="mt-8">
             <div className="flex justify-between items-center text-sm mb-2">
               <div className="flex items-center gap-2">
@@ -307,6 +308,7 @@ const EnquiryForm = ({ isOpen, onClose }) => {
             </div>
           </div>
 
+          {/* Form Content */}
           <div className="mt-8">
             <form onSubmit={handleSubmit} className="space-y-6">
               {currentStep === 1 && (
@@ -439,32 +441,32 @@ const EnquiryForm = ({ isOpen, onClose }) => {
                         <button
                           type="button"
                           onClick={() => handleDropdownClick('bus')}
-                          className="w-full px-4 py-2.5 bg-white border border-gray-300 rounded-lg text-left text-gray-900 focus:outline-none hover:border-[#FF5722]"
+                          className="w-full px-4 py-2.5 bg-white border border-gray-200 rounded-xl text-left text-gray-900 hover:border-[#FF5722] transition-colors duration-200 focus:outline-none focus:border-[#FF5722] focus:ring-2 focus:ring-[#FF5722]/10"
                         >
                           {formData.bus || 'Select Bus'}
-                          <span className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                            <svg className="w-4 h-4 text-gray-400" viewBox="0 0 20 20" fill="none">
+                          <span className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-gray-400">
+                            <svg className="w-5 h-5 transition-transform duration-200" style={{ transform: openDropdown === 'bus' ? 'rotate(180deg)' : 'rotate(0deg)' }} viewBox="0 0 20 20" fill="none">
                               <path d="M6 8l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                             </svg>
                           </span>
                         </button>
-                        {openDropdown === 'bus' && (
-                          <div className="absolute z-10 w-full mt-1 bg-white border border-gray-100 rounded-lg shadow-lg max-h-60 overflow-auto">
-                            <div className="py-1">
-                              {busOptions.map((option) => (
-                                <button
-                                  key={option}
-                                  type="button"
-                                  className="w-full px-4 py-2 text-left hover:bg-gray-50 text-gray-900"
-                                  onClick={() => handleOptionSelect('bus', option)}
-                                >
-                                  {option}
-                                </button>
-                              ))}
-                            </div>
-                          </div>
-                        )}
                       </div>
+                      {openDropdown === 'bus' && (
+                        <div className="w-full mt-1 bg-white border border-gray-100 rounded-xl shadow-lg overflow-hidden animate-expandDown">
+                          <div className="max-h-[200px] overflow-y-auto">
+                            {busOptions.map((option) => (
+                              <button
+                                key={option}
+                                type="button"
+                                className="w-full px-4 py-2.5 text-left hover:bg-gray-50 text-gray-700 hover:text-[#FF5722] transition-colors duration-200"
+                                onClick={() => handleOptionSelect('bus', option)}
+                              >
+                                {option}
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -673,47 +675,50 @@ const EnquiryForm = ({ isOpen, onClose }) => {
                 </div>
               )}
 
-              <div className="flex justify-between pt-6 mt-8 border-t border-gray-100">
-                {currentStep > 1 && (
-                  <button
-                    type="button"
-                    onClick={handlePrev}
-                    disabled={isSubmitting}
-                    className="px-6 py-2.5 text-sm font-medium text-gray-700 bg-gray-50 hover:bg-gray-100 rounded-xl border border-gray-200 transition-colors duration-200 flex items-center gap-2 group disabled:opacity-50"
-                  >
-                    <svg className="w-4 h-4 transition-transform duration-200 transform group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                    </svg>
-                    Previous
-                  </button>
-                )}
-                <button
-                  type={currentStep === 3 ? 'submit' : 'button'}
-                  onClick={currentStep === 3 ? undefined : handleNext}
-                  disabled={isSubmitting}
-                  className="px-6 py-2.5 text-sm font-medium text-white bg-gradient-to-r from-[#FF5722] to-[#3B4B96] rounded-xl hover:opacity-90 transition-opacity duration-200 flex items-center gap-2 group ml-auto disabled:opacity-50"
-                >
-                  {isSubmitting ? (
-                    <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                    </svg>
-                  ) : currentStep === 3 ? (
-                    <>
-                      Submit
-                      <svg className="w-4 h-4 transition-transform duration-200 transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              {/* Footer Buttons - Fixed at bottom */}
+              <div className="sticky bottom-0 bg-white pt-6 mt-8 border-t border-gray-100">
+                <div className="flex justify-between">
+                  {currentStep > 1 && (
+                    <button
+                      type="button"
+                      onClick={handlePrev}
+                      disabled={isSubmitting}
+                      className="px-6 py-2.5 text-sm font-medium text-gray-700 bg-gray-50 hover:bg-gray-100 rounded-xl border border-gray-200 transition-colors duration-200 flex items-center gap-2 group disabled:opacity-50"
+                    >
+                      <svg className="w-4 h-4 transition-transform duration-200 transform group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                       </svg>
-                    </>
-                  ) : (
-                    <>
-                      Next
-                      <svg className="w-4 h-4 transition-transform duration-200 transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </>
+                      Previous
+                    </button>
                   )}
-                </button>
+                  <button
+                    type={currentStep === 3 ? 'submit' : 'button'}
+                    onClick={currentStep === 3 ? undefined : handleNext}
+                    disabled={isSubmitting}
+                    className="px-6 py-2.5 text-sm font-medium text-white bg-gradient-to-r from-[#FF5722] to-[#3B4B96] rounded-xl hover:opacity-90 transition-opacity duration-200 flex items-center gap-2 group ml-auto disabled:opacity-50"
+                  >
+                    {isSubmitting ? (
+                      <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                      </svg>
+                    ) : currentStep === 3 ? (
+                      <>
+                        Submit
+                        <svg className="w-4 h-4 transition-transform duration-200 transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </>
+                    ) : (
+                      <>
+                        Next
+                        <svg className="w-4 h-4 transition-transform duration-200 transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                      </>
+                    )}
+                  </button>
+                </div>
               </div>
             </form>
           </div>
@@ -788,10 +793,48 @@ const EnquiryForm = ({ isOpen, onClose }) => {
             border-color: #FF5722;
             box-shadow: 0 0 0 3px rgba(255, 87, 34, 0.1);
           }
+          /* Custom Scrollbar for Dropdowns */
+          .max-h-[200px] {
+            scrollbar-width: thin;
+            scrollbar-color: #FF5722 #f3f4f6;
+          }
+          
+          .max-h-[200px]::-webkit-scrollbar {
+            width: 6px;
+          }
+          
+          .max-h-[200px]::-webkit-scrollbar-track {
+            background: #f3f4f6;
+            border-radius: 10px;
+          }
+          
+          .max-h-[200px]::-webkit-scrollbar-thumb {
+            background-color: #FF5722;
+            border-radius: 10px;
+            border: 2px solid #f3f4f6;
+          }
+
+          /* Expand Down Animation */
+          @keyframes expandDown {
+            from {
+              opacity: 0;
+              transform: scaleY(0);
+              transform-origin: top;
+            }
+            to {
+              opacity: 1;
+              transform: scaleY(1);
+              transform-origin: top;
+            }
+          }
+
+          .animate-expandDown {
+            animation: expandDown 0.2s ease-out forwards;
+          }
         `}
       </style>
     </div>
   );
 };
 
-export default EnquiryForm; 
+export default EnquiryForm;
