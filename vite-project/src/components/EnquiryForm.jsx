@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
+import emailjs from '@emailjs/browser';
 
 const EnquiryForm = ({ isOpen, onClose }) => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -203,12 +204,32 @@ const EnquiryForm = ({ isOpen, onClose }) => {
 
     setIsSubmitting(true);
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      console.log(formData);
+      // Prepare template params for EmailJS
+      const templateParams = {
+        destination: formData.destination,
+        package: formData.package,
+        busType: formData.busType,
+        bus: formData.bus,
+        travelDate: formData.travelDate ? formData.travelDate.toString() : '',
+        pickupLocations: formData.pickupLocations.join(', '),
+        dropLocations: formData.dropLocations.join(', '),
+        dropDate: formData.dropDate ? formData.dropDate.toString() : '',
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        message: formData.message,
+      };
+      await emailjs.send(
+        'service_mg0qvmr',
+        'template_a3af7wg',
+        templateParams,
+        'eBwb_pEOIhERCzcnZ'
+      );
+      alert('Enquiry sent successfully!');
       onClose();
     } catch (error) {
-      console.error('Error submitting form:', error);
+      alert('Failed to send enquiry. Please try again.');
+      console.error('EmailJS error:', error);
     } finally {
       setIsSubmitting(false);
     }
