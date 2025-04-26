@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from 'react-router-dom'
+
 import ContactPopup from './components/ContactPopup'
 import EnquiryForm from './components/EnquiryForm'
 import OperatorForm from './components/OperatorForm'
@@ -225,26 +226,40 @@ function App() {
 
   return (
     <Router>
-      <div className="min-h-screen relative overflow-hidden">
-        <Navbar 
-          onContactClick={handleContactClick}
-          onEnquiryClick={() => setShowForm(true)}
-        />
-        
-        <Routes>
-          <Route path="/" element={
-            <Home 
-              showContact={showContact}
-              showForm={showForm}
-              handleContactClick={handleContactClick}
-              handleCloseContact={handleCloseContact}
-              setShowForm={setShowForm}
-            />
-          } />
-          <Route path="/operator-registration" element={<OperatorForm />} />
-        </Routes>
+      <AppContent
+        showForm={showForm}
+        setShowForm={setShowForm}
+        showContact={showContact}
+        handleContactClick={handleContactClick}
+        handleCloseContact={handleCloseContact}
+      />
+    </Router>
+  )
+}
 
-        {/* Footer */}
+function AppContent({ showForm, setShowForm, showContact, handleContactClick, handleCloseContact }) {
+  const location = useLocation();
+
+  return (
+    <div className="min-h-screen relative overflow-hidden">
+      <Navbar 
+        onContactClick={handleContactClick}
+        onEnquiryClick={() => setShowForm(true)}
+      />
+      <Routes>
+        <Route path="/" element={
+          <Home 
+            showContact={showContact}
+            showForm={showForm}
+            handleContactClick={handleContactClick}
+            handleCloseContact={handleCloseContact}
+            setShowForm={setShowForm}
+          />
+        } />
+        <Route path="/operator-registration" element={<OperatorForm />} />
+      </Routes>
+      {/* Footer only on home page */}
+      {location.pathname === '/' && (
         <footer className="fixed bottom-0 w-full bg-white/90 backdrop-blur-sm text-center py-2 px-4 sm:px-6 md:px-8 shadow-top z-[50]">
           <div className="flex flex-col sm:flex-row items-center justify-center gap-2 text-gray-600">
             <div className="flex items-center gap-2">
@@ -267,70 +282,67 @@ function App() {
             </button>
           </div>
         </footer>
-
-        <style>
-          {`
-          @keyframes moveLeftToRight {
-            0% { transform: translateX(-150%); }
-            100% { transform: translateX(150%); }
+      )}
+      <style>{`
+        @keyframes moveLeftToRight {
+          0% { transform: translateX(-150%); }
+          100% { transform: translateX(150%); }
+        }
+        @keyframes moveRightToLeft {
+          0% { transform: translateX(150%); }
+          100% { transform: translateX(-150%); }
+        }
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes popup {
+          from { transform: scale(0.95); opacity: 0; }
+          to { transform: scale(1); opacity: 1; }
+        }
+        @keyframes gradient {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        .animate-moveLeftToRight {
+          animation: moveLeftToRight 25s linear infinite;
+        }
+        .animate-moveRightToLeft {
+          animation: moveRightToLeft 25s linear infinite;
+        }
+        .animate-fade-in {
+          animation: fadeIn 0.8s ease-out forwards;
+        }
+        .animate-popup {
+          animation: popup 0.3s ease-out forwards;
+        }
+        .animate-gradient {
+          animation: gradient 15s ease infinite;
+          background-size: 200% 200%;
+        }
+        .animate-gradient-reverse {
+          animation: gradient 15s ease infinite reverse;
+          background-size: 200% 200%;
+        }
+        @media (max-width: 768px) {
+          .bus-container {
+            transform: scale(0.5);
+            transform-origin: bottom;
           }
-          @keyframes moveRightToLeft {
-            0% { transform: translateX(150%); }
-            100% { transform: translateX(-150%); }
+        }
+        @media (min-width: 769px) and (max-width: 1024px) {
+          .bus-container {
+            transform: scale(0.7);
+            transform-origin: bottom;
           }
-          @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-          }
-          @keyframes popup {
-            from { transform: scale(0.95); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-          }
-          @keyframes gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-          }
-          .animate-moveLeftToRight {
-            animation: moveLeftToRight 25s linear infinite;
-          }
-          .animate-moveRightToLeft {
-            animation: moveRightToLeft 25s linear infinite;
-          }
-          .animate-fade-in {
-            animation: fadeIn 0.8s ease-out forwards;
-          }
-          .animate-popup {
-            animation: popup 0.3s ease-out forwards;
-          }
-          .animate-gradient {
-            animation: gradient 15s ease infinite;
-            background-size: 200% 200%;
-          }
-          .animate-gradient-reverse {
-            animation: gradient 15s ease infinite reverse;
-            background-size: 200% 200%;
-          }
-          @media (max-width: 768px) {
-            .bus-container {
-              transform: scale(0.5);
-              transform-origin: bottom;
-            }
-          }
-          @media (min-width: 769px) and (max-width: 1024px) {
-            .bus-container {
-              transform: scale(0.7);
-              transform-origin: bottom;
-            }
-          }
-          .shadow-top {
-            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-          }
-          `}
-        </style>
-      </div>
-    </Router>
-  )
+        }
+        .shadow-top {
+          box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        }
+      `}</style>
+    </div>
+  );
 }
 
 export default App
