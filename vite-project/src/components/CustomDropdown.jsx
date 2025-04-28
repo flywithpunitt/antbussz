@@ -1,13 +1,19 @@
 import React, { useState, useRef, useEffect } from 'react';
+import ReactDOM from 'react-dom';
 
 const CustomDropdown = ({ options, value, onChange, placeholder, isOpen, onOpen, onClose }) => {
   const dropdownRef = useRef(null);
   const buttonRef = useRef(null);
   const [openUpwards, setOpenUpwards] = useState(false);
+  const [menuStyles, setMenuStyles] = useState({});
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target) &&
+        (!buttonRef.current || !buttonRef.current.contains(event.target))
+      ) {
         onClose();
       }
     };
@@ -21,10 +27,19 @@ const CustomDropdown = ({ options, value, onChange, placeholder, isOpen, onOpen,
   useEffect(() => {
     if (isOpen && buttonRef.current) {
       const rect = buttonRef.current.getBoundingClientRect();
-      const dropdownHeight = 240; // max-h-60 = 15rem = 240px
+      const dropdownHeight = 240;
       const spaceBelow = window.innerHeight - rect.bottom;
       const spaceAbove = rect.top;
       setOpenUpwards(spaceBelow < dropdownHeight && spaceAbove > spaceBelow);
+      setMenuStyles({
+        position: 'absolute',
+        left: rect.left + window.scrollX,
+        width: rect.width,
+        zIndex: 9999,
+        ...(spaceBelow < dropdownHeight && spaceAbove > spaceBelow
+          ? { bottom: window.innerHeight - rect.top + 4 }
+          : { top: rect.bottom + 4 })
+      });
     }
   }, [isOpen]);
 
@@ -34,7 +49,7 @@ const CustomDropdown = ({ options, value, onChange, placeholder, isOpen, onOpen,
   };
 
   return (
-    <div className="relative" ref={dropdownRef}>
+    <>
       <button
         type="button"
         onClick={onOpen}
@@ -53,17 +68,17 @@ const CustomDropdown = ({ options, value, onChange, placeholder, isOpen, onOpen,
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
         </svg>
       </button>
-
-      {isOpen && (
+      {isOpen && ReactDOM.createPortal(
         <div
-          className={`absolute z-10 w-full bg-white rounded-xl shadow-lg max-h-60 overflow-auto border border-gray-100 ${openUpwards ? 'bottom-full mb-1' : 'mt-1'}`}
-          style={openUpwards ? { top: 'auto' } : {}}
+          ref={dropdownRef}
+          style={menuStyles}
+          className={`bg-white rounded-xl shadow-lg max-h-60 overflow-auto border border-gray-100 animate-dropdown-fade ${openUpwards ? '' : ''}`}
         >
           {options.map((option, index) => (
             <button
               key={index}
               type="button"
-              onClick={() => handleSelect(option)}
+              onMouseDown={() => handleSelect(option)}
               className={`w-full px-4 py-2.5 text-left hover:bg-gray-50 text-gray-700 hover:text-[#FF5722] transition-colors duration-200 ${
                 value === option ? 'bg-gray-50 text-[#FF5722]' : ''
               }`}
@@ -71,10 +86,23 @@ const CustomDropdown = ({ options, value, onChange, placeholder, isOpen, onOpen,
               {option}
             </button>
           ))}
-        </div>
+        </div>,
+        document.body
       )}
-    </div>
+    </>
   );
 };
 
-export default CustomDropdown; 
+export default CustomDropdown;
+
+<style>{`
+@keyframes dropdown-fade {
+  0% { opacity: 0; transform: scaleY(0.95); }
+  100% { opacity: 1; transform: scaleY(1); }
+}
+.animate-dropdown-fade {
+  animation: dropdown-fade 0.18s cubic-bezier(0.4,0,0.2,1);
+  transform-origin: top;
+  z-index: 99999 !important;
+}
+`}</style> 

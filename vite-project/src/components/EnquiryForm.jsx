@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import emailjs from '@emailjs/browser';
+import CustomDropdown from './CustomDropdown';
 
 const EnquiryForm = ({ isOpen, onClose }) => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -276,11 +277,7 @@ const EnquiryForm = ({ isOpen, onClose }) => {
               <div className="space-y-3">
                 <div className="flex items-center gap-3 animate-fadeInSlide">
                   {/* Bus Icon */}
-                  <div className="p-2.5 bg-gradient-to-br from-[#FF5722] to-[#3B4B96] rounded-xl shadow-lg transform -rotate-12">
-                    <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7h12m0 0v8a2 2 0 01-2 2H6a2 2 0 01-2-2V7m16 0l-3-3H7L4 7m0 0h16M4 7v8m0 0v2m16-2v2m-8-6h.01M8 13h.01" />
-                    </svg>
-                  </div>
+                  
                   <h2 className="text-3xl font-bold">
                     <span className="bg-gradient-to-r from-[#FF5722] to-[#3B4B96] bg-clip-text text-transparent">
                       Bus Hire
@@ -348,36 +345,16 @@ const EnquiryForm = ({ isOpen, onClose }) => {
                       <label className="block text-sm font-medium text-gray-700 mb-1.5">
                         Select Destination
                       </label>
-                      <div className="relative">
-                        <button
-                          type="button"
-                          onClick={() => handleDropdownClick('destination')}
-                          className="w-full px-4 py-2.5 bg-white border border-gray-200 rounded-xl text-left text-gray-900 hover:border-[#FF5722] transition-colors duration-200 focus:outline-none focus:border-[#FF5722] focus:ring-2 focus:ring-[#FF5722]/10"
-                        >
-                          {formData.destination || 'Select Destination'}
-                          <span className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-gray-400 group-hover:text-[#FF5722]">
-                            <svg className="w-5 h-5" viewBox="0 0 20 20" fill="none">
-                              <path d="M6 8l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                            </svg>
-                          </span>
-                        </button>
-                        {openDropdown === 'destination' && (
-                          <div className="absolute z-10 w-full mt-2 bg-white border border-gray-100 rounded-xl shadow-lg max-h-60 overflow-auto animate-fadeIn">
-                            <div className="py-1">
-                              {['Local Run', 'Outstation Run', 'Chardham Yatra'].map((option) => (
-                                <button
-                                  key={option}
-                                  type="button"
-                                  className="w-full px-4 py-2.5 text-left hover:bg-gray-50 text-gray-700 hover:text-[#FF5722] transition-colors duration-200"
-                                  onClick={() => handleOptionSelect('destination', option)}
-                                >
-                                  {option}
-                                </button>
-                              ))}
-                            </div>
-                          </div>
-                        )}
-                      </div>
+                      <CustomDropdown
+                        options={['Local Run', 'Outstation Run', 'Chardham Yatra']}
+                        value={formData.destination}
+                        onChange={val => handleOptionSelect('destination', val)}
+                        placeholder="Select Destination"
+                        isOpen={openDropdown === 'destination'}
+                        onOpen={() => handleDropdownClick('destination')}
+                        onClose={() => setOpenDropdown('')}
+                      />
+                      {renderError('destination')}
                     </div>
 
                     {formData.destination && (
@@ -385,36 +362,16 @@ const EnquiryForm = ({ isOpen, onClose }) => {
                         <label className="block text-sm font-medium text-gray-700 mb-1.5">
                           Select Package
                         </label>
-                        <div className="relative">
-                          <button
-                            type="button"
-                            onClick={() => handleDropdownClick('package')}
-                            className="w-full px-4 py-2.5 bg-white border border-gray-200 rounded-xl text-left text-gray-900 hover:border-[#FF5722] transition-colors duration-200 focus:outline-none focus:border-[#FF5722] focus:ring-2 focus:ring-[#FF5722]/10"
-                          >
-                            {formData.package || 'Select Package'}
-                            <span className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-gray-400 group-hover:text-[#FF5722]">
-                              <svg className="w-5 h-5" viewBox="0 0 20 20" fill="none">
-                                <path d="M6 8l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                              </svg>
-                            </span>
-                          </button>
-                          {openDropdown === 'package' && (
-                            <div className="absolute z-10 w-full mt-2 bg-white border border-gray-100 rounded-xl shadow-lg max-h-60 overflow-auto animate-fadeIn">
-                              <div className="py-1">
-                                {packageOptions.map((option) => (
-                                  <button
-                                    key={option}
-                                    type="button"
-                                    className="w-full px-4 py-2.5 text-left hover:bg-gray-50 text-gray-700 hover:text-[#FF5722] transition-colors duration-200"
-                                    onClick={() => handleOptionSelect('package', option)}
-                                  >
-                                    {option}
-                                  </button>
-                                ))}
-                              </div>
-                            </div>
-                          )}
-                        </div>
+                        <CustomDropdown
+                          options={packageOptions}
+                          value={formData.package}
+                          onChange={val => handleOptionSelect('package', val)}
+                          placeholder="Select Package"
+                          isOpen={openDropdown === 'package'}
+                          onOpen={() => handleDropdownClick('package')}
+                          onClose={() => setOpenDropdown('')}
+                        />
+                        {renderError('package')}
                       </div>
                     )}
 
@@ -422,72 +379,32 @@ const EnquiryForm = ({ isOpen, onClose }) => {
                       <label className="block text-sm font-medium text-gray-700 mb-1.5">
                         Select Bus Type
                       </label>
-                      <div className="relative">
-                        <button
-                          type="button"
-                          onClick={() => handleDropdownClick('busType')}
-                          className="w-full px-4 py-2.5 bg-white border border-gray-300 rounded-lg text-left text-gray-900 focus:outline-none hover:border-[#FF5722]"
-                        >
-                          {formData.busType || 'Select Bus Type'}
-                          <span className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                            <svg className="w-4 h-4 text-gray-400" viewBox="0 0 20 20" fill="none">
-                              <path d="M6 8l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                            </svg>
-                          </span>
-                        </button>
-                        {openDropdown === 'busType' && (
-                          <div className="absolute z-10 w-full mt-1 bg-white border border-gray-100 rounded-lg shadow-lg max-h-60 overflow-auto">
-                            <div className="py-1">
-                              {busTypeOptions.map((option) => (
-                                <button
-                                  key={option}
-                                  type="button"
-                                  className="w-full px-4 py-2 text-left hover:bg-gray-50 text-gray-900"
-                                  onClick={() => handleOptionSelect('busType', option)}
-                                >
-                                  {option}
-                                </button>
-                              ))}
-                            </div>
-                          </div>
-                        )}
-                      </div>
+                      <CustomDropdown
+                        options={busTypeOptions}
+                        value={formData.busType}
+                        onChange={val => handleOptionSelect('busType', val)}
+                        placeholder="Select Bus Type"
+                        isOpen={openDropdown === 'busType'}
+                        onOpen={() => handleDropdownClick('busType')}
+                        onClose={() => setOpenDropdown('')}
+                      />
+                      {renderError('busType')}
                     </div>
 
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-1.5">
                         Select Bus
                       </label>
-                      <div className="relative">
-                        <button
-                          type="button"
-                          onClick={() => handleDropdownClick('bus')}
-                          className="w-full px-4 py-2.5 bg-white border border-gray-200 rounded-xl text-left text-gray-900 hover:border-[#FF5722] transition-colors duration-200 focus:outline-none focus:border-[#FF5722] focus:ring-2 focus:ring-[#FF5722]/10"
-                        >
-                          {formData.bus || 'Select Bus'}
-                          <span className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-gray-400">
-                            <svg className="w-5 h-5 transition-transform duration-200" style={{ transform: openDropdown === 'bus' ? 'rotate(180deg)' : 'rotate(0deg)' }} viewBox="0 0 20 20" fill="none">
-                              <path d="M6 8l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                            </svg>
-                          </span>
-                        </button>
-                      </div>
-                      {openDropdown === 'bus' && (
-                        <div className="w-full mt-1 bg-white border border-gray-100 rounded-xl shadow-lg overflow-hidden animate-expandDown">
-                          <div className="max-h-[200px] overflow-y-auto">
-                            {busOptions.map((option) => (
-                              <button
-                                key={option}
-                                type="button"
-                                className="w-full px-4 py-2.5 text-left hover:bg-gray-50 text-gray-700 hover:text-[#FF5722] transition-colors duration-200"
-                                onClick={() => handleOptionSelect('bus', option)}
-                              >
-                                {option}
-                              </button>
-                            ))}
-                          </div>
-                        </div>
-                      )}
+                      <CustomDropdown
+                        options={busOptions}
+                        value={formData.bus}
+                        onChange={val => handleOptionSelect('bus', val)}
+                        placeholder="Select Bus"
+                        isOpen={openDropdown === 'bus'}
+                        onOpen={() => handleDropdownClick('bus')}
+                        onClose={() => setOpenDropdown('')}
+                      />
+                      {renderError('bus')}
                     </div>
                   </div>
                 </div>
@@ -696,50 +613,48 @@ const EnquiryForm = ({ isOpen, onClose }) => {
                 </div>
               )}
 
-              {/* Footer Buttons - Fixed at bottom */}
-              <div className="sticky bottom-0 bg-white pt-6 mt-8 border-t border-gray-100">
-                <div className="flex justify-between">
-                  {currentStep > 1 && (
-                    <button
-                      type="button"
-                      onClick={handlePrev}
-                      disabled={isSubmitting}
-                      className="px-6 py-2.5 text-sm font-medium text-gray-700 bg-gray-50 hover:bg-gray-100 rounded-xl border border-gray-200 transition-colors duration-200 flex items-center gap-2 group disabled:opacity-50"
-                    >
-                      <svg className="w-4 h-4 transition-transform duration-200 transform group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                      </svg>
-                      Previous
-                    </button>
-                  )}
+              {/* End of form fields */}
+              <div className="flex justify-end mt-8">
+                {currentStep > 1 && (
                   <button
-                    type={currentStep === 3 ? 'submit' : 'button'}
-                    onClick={currentStep === 3 ? undefined : handleNext}
+                    type="button"
+                    onClick={handlePrev}
                     disabled={isSubmitting}
-                    className="px-6 py-2.5 text-sm font-medium text-white bg-gradient-to-r from-[#FF5722] to-[#3B4B96] rounded-xl hover:opacity-90 transition-opacity duration-200 flex items-center gap-2 group ml-auto disabled:opacity-50"
+                    className="px-6 py-2.5 text-sm font-medium text-gray-700 bg-gray-50 hover:bg-gray-100 rounded-xl border border-gray-200 transition-colors duration-200 flex items-center gap-2 group disabled:opacity-50 mr-2"
                   >
-                    {isSubmitting ? (
-                      <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                      </svg>
-                    ) : currentStep === 3 ? (
-                      <>
-                        Submit
-                        <svg className="w-4 h-4 transition-transform duration-200 transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                        </svg>
-                      </>
-                    ) : (
-                      <>
-                        Next
-                        <svg className="w-4 h-4 transition-transform duration-200 transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                        </svg>
-                      </>
-                    )}
+                    <svg className="w-4 h-4 transition-transform duration-200 transform group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                    </svg>
+                    Previous
                   </button>
-                </div>
+                )}
+                <button
+                  type={currentStep === 3 ? 'submit' : 'button'}
+                  onClick={currentStep === 3 ? undefined : handleNext}
+                  disabled={isSubmitting}
+                  className="px-6 py-2.5 text-sm font-medium text-white bg-gradient-to-r from-[#FF5722] to-[#3B4B96] rounded-xl hover:opacity-90 transition-opacity duration-200 flex items-center gap-2 group disabled:opacity-50"
+                >
+                  {isSubmitting ? (
+                    <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                    </svg>
+                  ) : currentStep === 3 ? (
+                    <>
+                      Submit
+                      <svg className="w-4 h-4 transition-transform duration-200 transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </>
+                  ) : (
+                    <>
+                      Next
+                      <svg className="w-4 h-4 transition-transform duration-200 transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </>
+                  )}
+                </button>
               </div>
             </form>
           </div>

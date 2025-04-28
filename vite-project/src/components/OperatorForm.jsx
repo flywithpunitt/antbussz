@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import CustomDropdown from './CustomDropdown';
+import OperatorDropdown from './OperatorDropdown';
 import jsPDF from 'jspdf';
 
 const statesData = {
@@ -552,7 +552,7 @@ const OperatorForm = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
             <div className="relative">
               <label className="block text-sm font-medium text-gray-700 mb-2">State</label>
-              <CustomDropdown
+              <OperatorDropdown
                 options={Object.keys(statesData)}
                 value={formData.state}
                 onChange={handleStateSelect}
@@ -564,7 +564,7 @@ const OperatorForm = () => {
             </div>
             <div className="relative">
               <label className="block text-sm font-medium text-gray-700 mb-2">City</label>
-              <CustomDropdown
+              <OperatorDropdown
                 options={formData.state ? statesData[formData.state] : []}
                 value={formData.city}
                 onChange={handleCitySelect}
@@ -624,7 +624,7 @@ const OperatorForm = () => {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                       <div className="space-y-2">
                         <label className="block text-sm font-medium text-gray-700">Bus Type</label>
-                        <CustomDropdown
+                        <OperatorDropdown
                           options={busTypeOptions}
                           value={bus.busType}
                           onChange={(value) => handleBusTypeSelect(value, index)}
@@ -645,7 +645,7 @@ const OperatorForm = () => {
                       </div>
                       <div className="space-y-2">
                         <label className="block text-sm font-medium text-gray-700">Bus Model</label>
-                        <CustomDropdown
+                        <OperatorDropdown
                           options={bus.busType ? busModelOptions[bus.busType] : []}
                           value={bus.busModel}
                           onChange={(value) => handleBusModelSelect(value, index)}
