@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect } from 'react';
 
 const CustomDropdown = ({ options, value, onChange, placeholder, isOpen, onOpen, onClose }) => {
   const dropdownRef = useRef(null);
+  const buttonRef = useRef(null);
+  const [openUpwards, setOpenUpwards] = useState(false);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -16,6 +18,16 @@ const CustomDropdown = ({ options, value, onChange, placeholder, isOpen, onOpen,
     };
   }, [onClose]);
 
+  useEffect(() => {
+    if (isOpen && buttonRef.current) {
+      const rect = buttonRef.current.getBoundingClientRect();
+      const dropdownHeight = 240; // max-h-60 = 15rem = 240px
+      const spaceBelow = window.innerHeight - rect.bottom;
+      const spaceAbove = rect.top;
+      setOpenUpwards(spaceBelow < dropdownHeight && spaceAbove > spaceBelow);
+    }
+  }, [isOpen]);
+
   const handleSelect = (option) => {
     onChange(option);
     onClose();
@@ -27,6 +39,7 @@ const CustomDropdown = ({ options, value, onChange, placeholder, isOpen, onOpen,
         type="button"
         onClick={onOpen}
         className="w-full px-4 py-2.5 bg-white border border-gray-200 rounded-xl text-left text-gray-900 hover:border-[#FF5722] transition-colors duration-200 focus:outline-none focus:border-[#FF5722] focus:ring-2 focus:ring-[#FF5722]/10 flex justify-between items-center"
+        ref={buttonRef}
       >
         <span className={value ? 'text-gray-900' : 'text-gray-500'}>
           {value || placeholder}
@@ -42,7 +55,10 @@ const CustomDropdown = ({ options, value, onChange, placeholder, isOpen, onOpen,
       </button>
 
       {isOpen && (
-        <div className="absolute z-10 w-full mt-1 bg-white rounded-xl shadow-lg max-h-60 overflow-auto border border-gray-100">
+        <div
+          className={`absolute z-10 w-full bg-white rounded-xl shadow-lg max-h-60 overflow-auto border border-gray-100 ${openUpwards ? 'bottom-full mb-1' : 'mt-1'}`}
+          style={openUpwards ? { top: 'auto' } : {}}
+        >
           {options.map((option, index) => (
             <button
               key={index}
