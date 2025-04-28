@@ -93,7 +93,7 @@ const Home = ({ showContact, showForm, handleContactClick, handleCloseContact, s
         </div>
 
         {/* Moving Buses Container */}
-        <div className="absolute bottom-[16px] left-0 right-0">
+        <div className="absolute bottom-[10px] left-0 right-0">
           {/* Road */}
           <div className="relative h-[60px] md:h-[100px] mb-5">
             <img 
@@ -158,46 +158,46 @@ const Home = ({ showContact, showForm, handleContactClick, handleCloseContact, s
               <div className="flex gap-22 animate-moveRightToLeft">
                 <div className="relative bus-container">
                   <img src="/bus.png" alt="Bus" className="h-[120px] w-auto object-contain scale-x-[-1]" />
-                  <img src="/frontwheel.png" alt="Front Wheel" className="absolute bottom-2.5 right-[73%] w-[38px] h-[38px] animate-spin" />
-                  <img src="/backwheel.png" alt="Back Wheel" className="absolute bottom-2.5 right-[26%] w-[38px] h-[38px] animate-spin" />
+                  <img src="/frontwheel.png" alt="Front Wheel" className="absolute bottom-3 right-[73%] w-[38px] h-[38px] animate-spin" />
+                  <img src="/backwheel.png" alt="Back Wheel" className="absolute bottom-3 right-[26%] w-[38px] h-[38px] animate-spin" />
                 </div>
                 <div className="relative bus-container">
                   <img src="/bus.png" alt="Bus" className="h-[120px] w-auto object-contain scale-x-[-1]" />
-                  <img src="/frontwheel.png" alt="Front Wheel" className="absolute bottom-2.5 right-[73%] w-[38px] h-[38px] animate-spin" />
-                  <img src="/backwheel.png" alt="Back Wheel" className="absolute bottom-2.5 right-[26%] w-[38px] h-[38px] animate-spin" />
+                  <img src="/frontwheel.png" alt="Front Wheel" className="absolute bottom-3 right-[73%] w-[38px] h-[38px] animate-spin" />
+                  <img src="/backwheel.png" alt="Back Wheel" className="absolute bottom-3 right-[26%] w-[38px] h-[38px] animate-spin" />
                 </div>
                 <div className="relative bus-container">
                   <img src="/bus.png" alt="Bus" className="h-[120px] w-auto object-contain scale-x-[-1]" />
-                  <img src="/frontwheel.png" alt="Front Wheel" className="absolute bottom-2.5 right-[73%] w-[38px] h-[38px] animate-spin" />
-                  <img src="/backwheel.png" alt="Back Wheel" className="absolute bottom-2.5 right-[26%] w-[38px] h-[38px] animate-spin" />
+                  <img src="/frontwheel.png" alt="Front Wheel" className="absolute bottom-3 right-[73%] w-[38px] h-[38px] animate-spin" />
+                  <img src="/backwheel.png" alt="Back Wheel" className="absolute bottom-3 right-[26%] w-[38px] h-[38px] animate-spin" />
                 </div>
                 <div className="relative bus-container">
                   <img src="/bus.png" alt="Bus" className="h-[120px] w-auto object-contain scale-x-[-1]" />
-                  <img src="/frontwheel.png" alt="Front Wheel" className="absolute bottom-2.5 right-[73%] w-[38px] h-[38px] animate-spin" />
-                  <img src="/backwheel.png" alt="Back Wheel" className="absolute bottom-2.5 right-[26%] w-[38px] h-[38px] animate-spin" />
+                  <img src="/frontwheel.png" alt="Front Wheel" className="absolute bottom-3 right-[73%] w-[38px] h-[38px] animate-spin" />
+                  <img src="/backwheel.png" alt="Back Wheel" className="absolute bottom-3 right-[26%] w-[38px] h-[38px] animate-spin" />
                 </div>
               </div>
               {/* Second set with delay */}
               <div className="absolute top-0 left-0 flex gap-22 animate-moveRightToLeft" style={{animationDelay: "-12.5s"}}>
                 <div className="relative bus-container">
                   <img src="/bus.png" alt="Bus" className="h-[120px] w-auto object-contain scale-x-[-1]" />
-                  <img src="/frontwheel.png" alt="Front Wheel" className="absolute bottom-2.5 right-[73%] w-[38px] h-[38px] animate-spin" />
-                  <img src="/backwheel.png" alt="Back Wheel" className="absolute bottom-2.5 right-[26%] w-[38px] h-[38px] animate-spin" />
+                  <img src="/frontwheel.png" alt="Front Wheel" className="absolute bottom-3 right-[73%] w-[38px] h-[38px] animate-spin" />
+                  <img src="/backwheel.png" alt="Back Wheel" className="absolute bottom-3 right-[26%] w-[38px] h-[38px] animate-spin" />
                 </div>
                 <div className="relative bus-container">
                   <img src="/bus.png" alt="Bus" className="h-[120px] w-auto object-contain scale-x-[-1]" />
-                  <img src="/frontwheel.png" alt="Front Wheel" className="absolute bottom-2.5 right-[73%] w-[38px] h-[38px] animate-spin" />
-                  <img src="/backwheel.png" alt="Back Wheel" className="absolute bottom-2.5 right-[26%] w-[38px] h-[38px] animate-spin" />
+                  <img src="/frontwheel.png" alt="Front Wheel" className="absolute bottom-3 right-[73%] w-[38px] h-[38px] animate-spin" />
+                  <img src="/backwheel.png" alt="Back Wheel" className="absolute bottom-3 right-[26%] w-[38px] h-[38px] animate-spin" />
                 </div>
                 <div className="relative bus-container">
                   <img src="/bus.png" alt="Bus" className="h-[120px] w-auto object-contain scale-x-[-1]" />
-                  <img src="/frontwheel.png" alt="Front Wheel" className="absolute bottom-2.5 right-[73%] w-[38px] h-[38px] animate-spin" />
-                  <img src="/backwheel.png" alt="Back Wheel" className="absolute bottom-2.5 right-[26%] w-[38px] h-[38px] animate-spin" />
+                  <img src="/frontwheel.png" alt="Front Wheel" className="absolute bottom-3 right-[73%] w-[38px] h-[38px] animate-spin" />
+                  <img src="/backwheel.png" alt="Back Wheel" className="absolute bottom-3 right-[26%] w-[38px] h-[38px] animate-spin" />
                 </div>
                 <div className="relative bus-container">
                   <img src="/bus.png" alt="Bus" className="h-[120px] w-auto object-contain scale-x-[-1]" />
-                  <img src="/frontwheel.png" alt="Front Wheel" className="absolute bottom-2.5 right-[73%] w-[38px] h-[38px] animate-spin" />
-                  <img src="/backwheel.png" alt="Back Wheel" className="absolute bottom-2.5 right-[26%] w-[38px] h-[38px] animate-spin" />
+                  <img src="/frontwheel.png" alt="Front Wheel" className="absolute bottom-3 right-[73%] w-[38px] h-[38px] animate-spin" />
+                  <img src="/backwheel.png" alt="Back Wheel" className="absolute bottom-3 right-[26%] w-[38px] h-[38px] animate-spin" />
                 </div>
               </div>
             </div>
