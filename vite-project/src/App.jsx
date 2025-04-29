@@ -128,7 +128,7 @@ const Home = ({ showContact, showForm, handleContactClick, handleCloseContact, s
                 </div>
               </div>
               {/* Second set with delay */}
-              <div className="absolute top-0 left-0 flex gap-32 animate-moveLeftToRight" style={{animationDelay: "-12.5s"}}>
+              <div className="absolute top-0 left-0 flex gap-32 animate-moveLeftToRight" style={{animationDelay: "-17.5s"}}>
                 <div className="relative bus-container">
                   <img src="/bus.png" alt="Bus" className="h-[120px] w-auto object-contain" />
                   <img src="/backwheel.png" alt="Front Wheel" className="absolute bottom-[20px] left-[72%] w-[30px] h-[30px] animate-spin" />
@@ -178,7 +178,7 @@ const Home = ({ showContact, showForm, handleContactClick, handleCloseContact, s
                 </div>
               </div>
               {/* Second set with delay */}
-              <div className="absolute top-0 left-0 flex gap-22 animate-moveRightToLeft" style={{animationDelay: "-12.5s"}}>
+              <div className="absolute top-0 left-0 flex gap-22 animate-moveRightToLeft" style={{animationDelay: "-17.5s"}}>
                 <div className="relative bus-container">
                   <img src="/bus.png" alt="Bus" className="h-[120px] w-auto object-contain scale-x-[-1]" />
                   <img src="/backwheel.png" alt="Front Wheel" className="absolute bottom-[20px] left-[63%] w-[30px] h-[30px] animate-spin-reverse" />
@@ -313,10 +313,10 @@ function AppContent({ showForm, setShowForm, showContact, handleContactClick, ha
           to { transform: rotate(-360deg); }
         }
         .animate-moveLeftToRight {
-          animation: moveLeftToRight 25s linear infinite;
+          animation: moveLeftToRight 35s linear infinite;
         }
         .animate-moveRightToLeft {
-          animation: moveRightToLeft 25s linear infinite;
+          animation: moveRightToLeft 35s linear infinite;
         }
         .animate-fade-in {
           animation: fadeIn 0.8s ease-out forwards;
@@ -333,10 +333,10 @@ function AppContent({ showForm, setShowForm, showContact, handleContactClick, ha
           background-size: 200% 200%;
         }
         .animate-spin {
-          animation: spin 2s linear infinite;
+          animation: spin 4s linear infinite;
         }
         .animate-spin-reverse {
-          animation: spinReverse 2s linear infinite;
+          animation: spinReverse 4s linear infinite;
         }
         @media (max-width: 768px) {
           .bus-container {
