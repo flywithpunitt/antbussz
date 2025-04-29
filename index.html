@@ -1,0 +1,881 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon_1.svg">
+    <title>ANT BUS</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Web Fonts
+======================== -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" type="text/css">
+
+    <!-- Stylesheet
+======================== -->
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.svg">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Manrope:wght@200..800&family=Montez&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/fontawesome.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.min.css">
+    <link rel="stylesheet" href="css/swiper-bundle.min.css">
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <link rel="stylesheet" href="css/jquery-ui-timepicker-addon.min.css">
+    <link rel="stylesheet" href="css/stylesheet.css">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/jquery-ui-timepicker-addon.min.css"> -->
+    <style>
+        h1 {
+            margin-bottom: 20px !important;
+        }
+
+        h2 {
+            margin-bottom: 0 !important;
+        }
+
+        .road-car {
+            height: auto;
+            padding-top: 80px;
+            margin-top: 160px;
+        }
+
+        .th-btn.th-icon:after {
+            display: none;
+        }
+
+        .th-btn {
+            padding: 15px 30px;
+            font-size: 18px;
+        }
+
+        .contact-form.style2 textarea,
+        .contact-form.style2 textarea.form-control {
+            min-height: 100px;
+        }
+
+        .contact-form.style2 .form-control,
+        .contact-form.style2 .form-select,
+        .contact-form.style2 input,
+        .contact-form.style2 select,
+        .contact-form.style2 textarea {
+            height: 55px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .bg-danger {
+            background-color: #f05a27 !important;
+        }
+
+        .ui-datepicker {
+            z-index: 1050 !important;
+            /* To appear above modal */
+        }
+
+        .bus.right {
+            top: 90px;
+        }
+
+        .road-car {
+            margin-bottom: -7px;
+        }
+
+
+        @media screen and (min-width:992px) and (max-width:1199.98px) {
+            .bus {
+                width: 255px;
+                height: 69px;
+                border-radius: 10px;
+                top: 75px;
+            }
+
+            .road-car {
+                padding-top: 100px;
+            }
+
+            .road {
+                bottom: 180px;
+            }
+
+            .bus.left {
+                top: 65px;
+            }
+
+            #main-wrapper {
+                background-size: 100% 95% !important;
+                background-position: 100% -70px !important;
+            }
+
+            .bus.right .frontwheel {
+                right: 71px !important;
+                width: 23px !important;
+            }
+
+            .bus.right .backwheel {
+                width: 23px;
+                bottom: 1px;
+                left: 46px;
+            }
+
+            .bus.left .frontwheel {
+                width: 23px !important;
+                right: 41px;
+            }
+
+            .bus.left .backwheel {
+                width: 23px;
+                left: 73px;
+            }
+        }
+
+        @media screen and (min-width:768px) and (max-width:991.98px) {
+            #main-wrapper {
+                background-size: cover !important;
+                background-position: center !important;
+            }
+
+            h2 {
+                font-size: 40px !important;
+            }
+
+            .road-car {
+                margin-bottom: -8px;
+            }
+
+            .bus.left {
+                top: 75px;
+            }
+        }
+
+        @media screen and (max-width:767.98px) {
+            #main-wrapper {
+                background-size: cover !important;
+                background-position: center !important;
+            }
+
+            .road {
+                display: block !important;
+                bottom: 145px;
+            }
+
+            .road-car {
+                margin-bottom: 37px;
+                margin-top: 70px;
+            }
+
+            .bus.right .backwheel {
+                width: 14px;
+                bottom: 1px;
+                left: 26px;
+            }
+
+            .bus.left .backwheel {
+                width: 14px;
+                bottom: 1px;
+                left: 42px;
+            }
+
+            .road_image {
+                height: 70px !important;
+            }
+
+            .bus {
+                width: 150px;
+                height: 40px;
+            }
+
+            .bus.right {
+                top: 87px;
+            }
+
+            footer {
+                position: absolute !important;
+                bottom: 0 !important;
+            }
+
+            .hero-wrap .hero-content {
+                /* margin-top: 97px; */
+            }
+        }
+
+        /* .position-absolute {
+            position: static !important;
+        } */
+
+        /* @media screen and (min-width:768px) {
+            .position-absolute {
+                position: absolute !important;
+            }
+        } */
+
+        @media screen and (max-width:575.98px) {
+            body{background:#fff;}
+            #header .navbar {padding: 10px 0;background-color: #fff !important;margin-top: 0 !important;position: static !important;}
+            footer {
+                padding: 5px;position: static !important;
+            }
+
+            footer p.text-3 {
+                font-size: 11px !important;
+            }
+
+            .road-car {
+                position: static !important;
+                margin-bottom: -7px;
+                margin-top: 0;padding-top: 20px;
+            }
+
+            .road_image {
+                height: 70px !important;
+            }
+
+            .bus {
+                width: 111px;
+                height: 30px;
+            }
+
+            .road {
+                bottom: 130px;
+            }
+
+            .bus.right {
+                top: 80px;
+            }
+
+            .bus.left .frontwheel {
+                width: 14px;
+                bottom: -1px;
+                right: 17px;
+            }
+
+            .bus.left .backwheel {
+                width: 14px;
+                bottom: -1px;
+                left: 28px;
+            }
+
+            .bus.right .frontwheel {
+                width: 14px;
+                bottom: -1px;
+                right: 29px;
+            }
+
+            .bus.right .backwheel {
+                width: 14px;
+                bottom: -1px;
+                left: 19px;
+            }
+            #main-wrapper{background-image:unset !important;}
+            #main-wrapper{display:none !important;}
+            .main-content{position: static !important;height: 100%;}
+            .main-content > div, .hero-wrap, .hero-wrap .hero-content{height: 100% !important;}
+            .content-main{background-size: 100% 100%;background-position: center;background-repeat: no-repeat;margin-top: 0;}
+            .content-main .row{padding:20px 0 0 !important;}
+            .main-content .bottom-part{position:absolute !important;bottom:0 !important;height: auto !important;}
+            .content-main h2{font-size: 40px !important;margin-top: 0 !important;}
+            .para{margin-top: 20px;}
+        }
+    </style>
+
+
+</head>
+
+<body class="overflow-hidden">
+
+<div id="main-wrapper" class="hero-bg vh-100 d-none d-sm-block" style="background-image:url('images/intro-bg.jpg');background-size:cover;background-position:100% -70px;background-repeat:no-repeat;">
+
+<!-- Header -->
+<header id="header">
+    <!-- Navbar -->
+    <nav class="primary-menu navbar navbar-expand-md navbar-text-light bg-transparent border-bottom-0 mt-4">
+        <div class="container position-relative">
+            <div class="col-auto">
+                <!-- Logo -->
+                <a class="logo" href="index.html" title=""> <img src="images/logo2.png" alt="" style="width: 150px;">
+                </a>
+                <!-- Logo End -->
+            </div>
+
+            <div class="col-auto d-flex justify-content-end">
+                <a href="#" class="th-btn style3 th-icon ms-0" data-bs-toggle="modal" data-bs-target="#booknow">Send Enquiry</a>
+            </div>
+        </div>
+    </nav>
+    <!-- Navbar End -->
+</header>
+<!-- Header End -->
+
+<div class="position-absolute bottom-0 main-content">
+    <div class=" px-0">
+        <section class="hero-wrap">
+
+
+            <div class="hero-content d-flex flex-column">
+
+                <div class="content-main">
+                    <div class="container">
+                        <div class="row py-5 py-sm-4">
+                            <div class="col-12 text-center mx-auto">
+                                <h1 class="text-9 text-white bg-danger d-inline-block fw-700 rounded px-3 py-2">
+                                    Coming Soon!</h1>
+                                <h2 class=" fw-600 text-dark mt-4">Our new website is on its way.</h2>
+                            </div>
+                    
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-cover position-relative section breadcrumb-banner position-relative pb-0 d-block road-car bottom-0">
+                    <img src="images/road.png" class="img-fluid banner_image road_image" alt="...">
+
+                    <div class="road">
+                        <div class="bus left">
+                            <img src="images/frontwheel.png" class="img-fluid frontwheel" alt="...">
+                            <img src="images/backwheel.png" class="img-fluid backwheel" alt="...">
+                        </div>
+                        <div class="bus left bus_left_2">
+                            <img src="images/frontwheel.png" class="img-fluid frontwheel" alt="...">
+                            <img src="images/backwheel.png" class="img-fluid backwheel" alt="...">
+                        </div>
+                        <div class="bus left bus_left_3">
+                            <img src="images/frontwheel.png" class="img-fluid frontwheel" alt="...">
+                            <img src="images/backwheel.png" class="img-fluid backwheel" alt="...">
+                        </div>
+                        <div class="bus left bus_left_4">
+                            <img src="images/frontwheel.png" class="img-fluid frontwheel" alt="...">
+                            <img src="images/backwheel.png" class="img-fluid backwheel" alt="...">
+                        </div>
+                        <div class="bus left bus_left_5">
+                            <img src="images/frontwheel.png" class="img-fluid frontwheel" alt="...">
+                            <img src="images/backwheel.png" class="img-fluid backwheel" alt="...">
+                        </div>
+                        <div class="bus right">
+                            <img src="images/frontwheel.png" class="img-fluid frontwheel" alt="...">
+                            <img src="images/backwheel.png" class="img-fluid backwheel" alt="...">
+                        </div>
+                        <div class="bus right bus_right_2">
+                            <img src="images/frontwheel.png" class="img-fluid frontwheel" alt="...">
+                            <img src="images/backwheel.png" class="img-fluid backwheel" alt="...">
+                        </div>
+                        <div class="bus right bus_right_3">
+                            <img src="images/frontwheel.png" class="img-fluid frontwheel" alt="...">
+                            <img src="images/backwheel.png" class="img-fluid backwheel" alt="...">
+                        </div>
+                        <div class="bus right bus_right_4">
+                            <img src="images/frontwheel.png" class="img-fluid frontwheel" alt="...">
+                            <img src="images/backwheel.png" class="img-fluid backwheel" alt="...">
+                        </div>
+                        <div class="bus right bus_right_5">
+                            <img src="images/frontwheel.png" class="img-fluid frontwheel" alt="...">
+                            <img src="images/backwheel.png" class="img-fluid backwheel" alt="...">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+    </div>
+
+    <footer class="text-center bg-white py-2 w-100 float-start">
+        <p class="text-dark text-3 mb-0 fw-medium ">
+            All Rights Reserved. Designed by A N T Soft Solution.
+        </p>
+    </footer>
+</div>
+
+
+
+</div>
+
+<div class="hero-bg d-sm-none">
+
+<!-- Header -->
+<header id="header">
+    <!-- Navbar -->
+    <nav class="primary-menu navbar navbar-expand-md navbar-text-light bg-transparent border-bottom-0 mt-4">
+        <div class="container position-relative">
+            <div class="col-auto">
+                <!-- Logo -->
+                <a class="logo" href="index.html" title=""> <img src="images/logo2.png" alt="" style="width: 150px;">
+                </a>
+                <!-- Logo End -->
+            </div>
+
+            <div class="col-auto d-flex justify-content-end">
+                <a href="#" class="th-btn style3 th-icon ms-0" data-bs-toggle="modal" data-bs-target="#booknow">Send Enquiry</a>
+            </div>
+        </div>
+    </nav>
+    <!-- Navbar End -->
+</header>
+<!-- Header End -->
+
+<div class="main-content">
+    <img src="images/intro-bg.png" class="img-fluid" alt="...">
+    <div class=" px-0">
+        <section class="hero-wrap">
+
+
+            <div class="hero-content d-flex flex-column">
+
+                <div class="content-main">
+                    <div class="container">
+                        <div class="row py-5 py-sm-4">
+                            <div class="col-12 text-center mx-auto">
+                                <h1 class="text-9 text-white bg-danger d-inline-block fw-700 rounded px-3 py-2">
+                                    Coming Soon!</h1>
+                                <h2 class=" fw-600 text-dark mt-4">Our new website is on its way.</h2>
+                                <p class="para">
+                                    We are thrilled to announce that something exciting is coming your way! Our brand-new website is under development and will soon be ready to deliver a fresh, seamless, and user-friendly experience.
+                                </p>
+                            </div>
+                    
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+    </div>
+
+    <div class="bottom-part">
+        <div class="bg-cover position-relative section breadcrumb-banner position-relative pb-0 d-block road-car bottom-0">
+                        <img src="images/road.png" class="img-fluid banner_image road_image" alt="...">
+        
+                        <div class="road">
+                            <div class="bus left">
+                                <img src="images/frontwheel.png" class="img-fluid frontwheel" alt="...">
+                                <img src="images/backwheel.png" class="img-fluid backwheel" alt="...">
+                            </div>
+                            <div class="bus left bus_left_2">
+                                <img src="images/frontwheel.png" class="img-fluid frontwheel" alt="...">
+                                <img src="images/backwheel.png" class="img-fluid backwheel" alt="...">
+                            </div>
+                            <div class="bus left bus_left_3">
+                                <img src="images/frontwheel.png" class="img-fluid frontwheel" alt="...">
+                                <img src="images/backwheel.png" class="img-fluid backwheel" alt="...">
+                            </div>
+                            <div class="bus left bus_left_4">
+                                <img src="images/frontwheel.png" class="img-fluid frontwheel" alt="...">
+                                <img src="images/backwheel.png" class="img-fluid backwheel" alt="...">
+                            </div>
+                            <div class="bus left bus_left_5">
+                                <img src="images/frontwheel.png" class="img-fluid frontwheel" alt="...">
+                                <img src="images/backwheel.png" class="img-fluid backwheel" alt="...">
+                            </div>
+                            <div class="bus right">
+                                <img src="images/frontwheel.png" class="img-fluid frontwheel" alt="...">
+                                <img src="images/backwheel.png" class="img-fluid backwheel" alt="...">
+                            </div>
+                            <div class="bus right bus_right_2">
+                                <img src="images/frontwheel.png" class="img-fluid frontwheel" alt="...">
+                                <img src="images/backwheel.png" class="img-fluid backwheel" alt="...">
+                            </div>
+                            <div class="bus right bus_right_3">
+                                <img src="images/frontwheel.png" class="img-fluid frontwheel" alt="...">
+                                <img src="images/backwheel.png" class="img-fluid backwheel" alt="...">
+                            </div>
+                            <div class="bus right bus_right_4">
+                                <img src="images/frontwheel.png" class="img-fluid frontwheel" alt="...">
+                                <img src="images/backwheel.png" class="img-fluid backwheel" alt="...">
+                            </div>
+                            <div class="bus right bus_right_5">
+                                <img src="images/frontwheel.png" class="img-fluid frontwheel" alt="...">
+                                <img src="images/backwheel.png" class="img-fluid backwheel" alt="...">
+                            </div>
+                        </div>
+        </div>
+        
+        <footer class="text-center bg-white py-2 w-100 float-start">
+            <p class="text-dark text-3 mb-0 fw-medium ">
+                All Rights Reserved. Designed by A N T Soft Solution.
+            </p>
+        </footer>
+    </div>
+
+</div>
+
+</div>
+
+    <div class="modal fade" id="booknow" tabindex="-1" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header border-bottom-0 p-0">
+                    <button type="button" class="btn-close w-auto h-auto opacity-100" data-bs-dismiss="modal" aria-label="Close">
+                        <img src="https://img.icons8.com/?size=100&id=3062&format=png&color=000000" class="img-fluid m-2 opacity-100" alt="..." width="25px">
+                    </button>
+                </div>
+
+                <div class="modal-body pt-0">
+                    <h5 class="text-center">Bus Hire - Submit Your Details</h5>
+
+                    <form action="#" method="POST" class="contact-form style2 ajax-contact p-0">
+
+                        <div class="row step" data-step="1">
+                            <div class="col-12 form-group">
+                                <label>Select Destination</label>
+                                <select name="Destination" id="select-type" class="form-select nice-select" required="">
+                                    <option value="" selected="selected" disabled="disabled">Select Destination</option>
+                                    <option value="Local Run">Local Run</option>
+                                    <option value="Outstation Run">Outstation Run</option>
+                                </select>
+                            </div>
+                            <div class="col-12 form-group" id="local-package" style="display: none;">
+                                <label>Select Package</label>
+                                <select class="form-select nice-select" name="package-local">
+                                    <option value="" selected="selected" disabled="disabled">Select Package
+                                    </option>
+                                    <option value="4hr/40km">4hr/40km</option>
+                                    <option value="8hr/80km">8hr/80km</option>
+                                    <option value="12hr/120km">12hr/120km</option>
+                                    <option value="16hr/160km">16hr/160km</option>
+                                    <option value="24hr/200km">24hr/200km</option>
+                                </select>
+                            </div>
+                            <div class="col-12 form-group" id="outstation-package" style="display: none;">
+                                <label>Select Package</label>
+                                <select class="form-select nice-select" name="package-outstation">
+                                    <option value="" selected="selected" disabled="disabled">Select Package
+                                    </option>
+                                    <option value="One Way">One Way</option>
+                                    <option value="Roundtrip">Roundtrip</option>
+                                </select>
+                            </div>
+                            <div class="col-12 form-group">
+                                <label>Select Bus Type</label>
+                                <select id="busType" name="Vehicle_Type" class="form-select " required="">
+                                    <option value="" selected="selected" disabled="disabled">
+                                        Select Bus Type
+                                    </option>
+                                    <option value="AC Deluxe Buses">AC Deluxe Buses</option>
+                                    <option value="AC Luxury Buses">AC Luxury Buses</option>
+                                    <option value="AC Sleeper Buses">AC Sleeper Buses</option>
+                                </select>
+                            </div>
+                            <div class="col-12 form-group">
+                                <label>Select Bus</label>
+                                <select id="busSelect" name="Bus" class="form-select " required="">
+                                    <option value="" selected="selected" disabled="disabled">
+                                        Select Bus
+                                    </option>
+                                    <!-- <option value="AC Deluxe Bus 21 Seater (2+1)">AC Deluxe Bus 21 Seater (2+1)</option>
+                                    <option value="AC Deluxe Bus 27 Seater (2+2)">AC Deluxe Bus 27 Seater (2+2)</option>
+                                    <option value="AC Deluxe Bus 35 Seater (2+2)">AC Deluxe Bus 35 Seater (2+2)</option>
+                                    <option value="AC Deluxe Bus 41 Seater (2+2)">AC Deluxe Bus 41 Seater (2+2)</option>
+                                    <option value="AC Deluxe Bus 45 Seater (2+2)">AC Deluxe Bus 45 Seater (2+2)</option>
+                                    <option value="AC Deluxe Bus 49 Seater (2+2)">AC Deluxe Bus 49 Seater (2+2)</option>
+                                    <option value="AC Deluxe Bus 60 Seater (3+2)">AC Deluxe Bus 60 Seater (3+2)</option>
+
+                                    <option value="AC Luxury Bus 25 Seater (2+1)">AC Luxury Bus 25 Seater (2+1)</option>
+                                    <option value="AC Luxury Bus 31 Seater (2+2)">AC Luxury Bus 31 Seater (2+2)</option>
+                                    <option value="AC Luxury Bus 41 Seater (2+2)">AC Luxury Bus 41 Seater (2+2)</option>
+                                    <option value="AC Luxury Bus 45 Seater (2+2)">AC Luxury Bus 45 Seater (2+2)</option>
+                                    <option value="AC Luxury Bus 49 Seater (2+2)">AC Luxury Bus 49 Seater (2+2)</option>
+                                    <option value="AC Luxury Bus 55 Seater (2+2)">AC Luxury Bus 55 Seater (2+2)</option>
+                                    <option value="AC Seater Sleeper Bus (2+2)">AC Seater Sleeper Bus (2+2)</option>
+                                    <option value="AC Sleeper Bus (2+1)">AC Sleeper Bus (2+1)</option> -->
+                                </select>
+                            </div>
+                            <!-- <div class="form-btn col-12">
+                                <button type="submit" class="th-btn style3 th-icon px-3 py-2 ms-0">Next</button>
+                            </div> -->
+                        </div>
+
+                        <div class="row step" style="display:none;" data-step="2">
+                            <div class="col-12 form-group">
+                                <label>Travel Date & Time</label>
+                                <input type="text" name="Travel_Date" class="datetimepicker" placeholder="dd-mm-yyyy" required="">
+                            </div>
+
+                            <div id="Pickup-Location" class="col-12 form-group">
+                                <div class="form-group d-flex align-items-center gap-1 mb-2">
+                                    <div class="flex-fill">
+                                        <label>Pickup Location</label>
+                                        <input type="text" name="Pickup_Location[]" placeholder="Enter Location" required="">
+                                    </div>
+                                    <div>
+                                        <img src="https://img.icons8.com/?size=100&id=12386&format=png&color=000000" class="img-fluid mt-4 delete-button" alt="..." style="width:30px;" type="button">
+                                    </div>
+                                    <div>
+                                        <img src="https://img.icons8.com/?size=100&id=63650&format=png&color=000000" class="img-fluid mt-4 add-button" alt="..." style="width:30px;" type="button">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="Drop-off-Location" class="col-12 form-group">
+                                <div class="form-group d-flex align-items-center gap-1 mb-2">
+                                    <div class="flex-fill">
+                                        <label>Drop-off Location</label>
+                                        <input type="text" name="Drop_Location[]" placeholder="Enter Location" required="">
+                                    </div>
+                                    <div>
+                                        <img src="https://img.icons8.com/?size=100&id=12386&format=png&color=000000" class="img-fluid mt-4 delete-button" alt="..." style="width:30px;" type="button">
+                                    </div>
+                                    <div>
+                                        <img src="https://img.icons8.com/?size=100&id=63650&format=png&color=000000" class="img-fluid mt-4 add-button" alt="..." style="width:30px;" type="button">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 form-group">
+                                <label>Drop-off Date & Time</label>
+                                <input type="text" name="Drop_Time" class="datetimepicker" placeholder="dd-mm-yyyy" required="">
+                            </div>
+                            <!-- <div class="form-btn col-12">
+                                <button type="submit" class="th-btn style3 th-icon px-3 py-2 ms-0 bg-dark">Preview</button>
+                                <button type="submit" class="th-btn style3 th-icon px-3 py-2 ms-0">Next</button>
+                            </div> -->
+                        </div>
+
+                        <div class="row step" style="display:none;" data-step="3">
+                            <div class="col-12 form-group">
+                                <label>Name</label>
+                                <input type="text" class="form-control" name="Name" id="" placeholder="Name" required="">
+                            </div>
+                            <div class="col-12 form-group">
+                                <label>Email</label>
+                                <input type="text" class="form-control" name="Email" id="" placeholder="Email" required="">
+                            </div>
+                            <div class="col-12 form-group">
+                                <label>Phone</label>
+                                <input type="text" class="form-control" name="Phone" id="" placeholder="Phone" required="">
+                            </div>
+
+                            <div class="form-group col-12">
+                                <label>Message</label>
+                                <textarea name="message" id="message" cols="30" rows="3" class="form-control" placeholder="Your Message"></textarea>
+                            </div>
+                            <!-- <div class="form-btn col-12">
+                                <button type="submit" class="th-btn style3 th-icon px-3 py-2 ms-0">Send Enquiry</button>
+                            </div> -->
+                        </div>
+
+                        <div class="form-btn col-12">
+                            <button type="button" class="th-btn style3 th-icon px-3 py-2 ms-0 bg-dark" id="prev-btn" style="display: none;">Previous</button>
+                            <button type="button" class="th-btn style3 th-icon px-3 py-2 ms-0" id="next-btn">Next</button>
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="js/jquery-3.6.4.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/swiper-bundle.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/jquery.counterup.min.js"></script>
+    <!-- <script src="assets/js/jquery-ui.min.js"></script> -->
+    <!-- <script src="assets/js/imagesloaded.pkgd.min.js"></script> -->
+    <script src="js/jquery-ui.js"></script>
+    <script src="js/isotope.pkgd.min.js"></script>
+    <!-- <script src="assets/js/gsap.min.js"></script> -->
+    <script src="js/circle-progress.js"></script>
+    <script src="js/matter.min.js"></script>
+    <script src="js/nice-select.min.js"></script>
+    <script src="js/main.js"></script>
+
+    <script src="js/jquery-ui-timepicker-addon.min.js"></script>
+    <script>
+        $(function() {
+            $('.datetimepicker').datetimepicker({
+                dateFormat: 'dd-M-yy',
+                timeFormat: 'hh:mm TT',
+                ampm: true,
+                controlType: 'select',
+                oneLine: true,
+                    beforeShowDay: function(date) {
+                    // If date is before today, return false (disabled) with a custom class
+                    var today = new Date();
+                    today.setHours(0, 0, 0, 0); // Set the time to midnight for comparison
+                    if (date < today) {
+                        return [false, 'past-date']; // Disable and add 'past-date' class
+                    }
+                    return [true]; // Enable future dates
+                }
+            });
+        });
+    </script>
+
+
+    <script>
+        $(document).ready(function() {
+            // Function to add a new input field with dynamic placeholder
+            $("#Pickup-Location .add-button").click(function() {
+                // Count the number of existing input fields
+                // let locationCount = $("#Pickup-Location .location-field").length + 1;
+
+                // Append a new input field with a dynamic placeholder
+                $("#Pickup-Location").append(
+                    `
+                                <div class="location-field mb-2">
+                                   <input type="text" name="Pickup_Location[]" placeholder="Enter Location">
+                                </div>
+                           
+                        `
+                );
+            });
+
+            // Function to delete the last input field
+            $("#Pickup-Location .delete-button").click(function() {
+                $("#Pickup-Location .location-field:last-child").remove();
+            });
+
+        });
+    </script>
+
+    <script>
+        $("#Drop-off-Location .add-button").click(function() {
+            // Count the number of existing input fields
+            // let locationCount = $("#Drop-off-Location .location-field").length + 1;
+
+            // Append a new input field with a dynamic placeholder
+            $("#Drop-off-Location").append(
+                `
+                        <div class="location-field mb-2">
+                            <input type="text" name="Drop_Location[]" placeholder="Enter Location">
+                        </div>
+                    `
+            );
+        });
+
+        // Function to delete the last input field
+        $("#Drop-off-Location .delete-button").click(function() {
+            $("#Drop-off-Location .location-field:last-child").remove();
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#select-type').on('change', function () {
+                const value = $(this).val();
+
+                if (value === 'Outstation Run') {
+                    $('#local-package').hide().find('input, select, textarea').removeAttr('required'); // Remove required from local package inputs
+                    $('#outstation-package').show().find('input, select, textarea').attr('required', 'required'); // Add required to outstation package inputs
+                } else if (value === 'Local Run') {
+                    $('#outstation-package').hide().find('input, select, textarea').removeAttr('required'); // Remove required from outstation package inputs
+                    $('#local-package').show().find('input, select, textarea').attr('required', 'required'); // Add required to local package inputs
+                } else {
+                    $('#local-package, #outstation-package').hide().find('input, select, textarea').removeAttr('required'); // Remove required from all
+                }
+            });
+        });
+    </script>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const steps = document.querySelectorAll(".step");
+            const nextBtn = document.getElementById("next-btn");
+            const prevBtn = document.getElementById("prev-btn");
+            const form = document.querySelector(".contact-form");
+            let currentStep = 1;
+
+            function showStep(step) {
+                steps.forEach((el) => {
+                    el.style.display = el.getAttribute("data-step") == step ? "block" : "none";
+                });
+                prevBtn.style.display = step > 1 ? "inline-block" : "none";
+                nextBtn.innerText = step === steps.length ? "Submit" : "Next";
+            }
+
+            function validateStep(step) {
+                const currentStepFields = steps[step - 1].querySelectorAll("input, select, textarea");
+                for (const field of currentStepFields) {
+                    if (!field.checkValidity()) {
+                        alert(`Please fill the required field.`);
+                        field.focus();
+                        field.scrollIntoView({ behavior: "smooth", block: "center" });
+                        return false;
+                    }
+                }
+                return true;
+            }
+
+            nextBtn.addEventListener("click", () => {
+                if (currentStep < steps.length) {
+                    if (validateStep(currentStep)) {
+                        currentStep++;
+                        showStep(currentStep);
+                    }
+                } else {
+                    // Validate last step before submitting
+                    if (validateStep(currentStep)) {
+                        form.submit();
+                    }
+                }
+            });
+
+            prevBtn.addEventListener("click", () => {
+                if (currentStep > 1) {
+                    currentStep--;
+                    showStep(currentStep);
+                }
+            });
+
+            showStep(currentStep);
+        });
+    </script>
+    
+    <script>
+    // Bus data based on type
+    const busData = {
+        "AC Deluxe Buses": [
+            "AC Deluxe Bus 21 Seater (2+1)",
+            "AC Deluxe Bus 27 Seater (2+2)",
+            "AC Deluxe Bus 35 Seater (2+2)",
+            "AC Deluxe Bus 41 Seater (2+2)",
+            "AC Deluxe Bus 45 Seater (2+2)",
+            "AC Deluxe Bus 49 Seater (2+2)",
+            "AC Deluxe Bus 60 Seater (3+2)"
+        ],
+        "AC Luxury Buses": [
+            "AC Luxury Bus 25 Seater (2+1)",
+            "AC Luxury Bus 31 Seater (2+2)",
+            "AC Luxury Bus 41 Seater (2+2)",
+            "AC Luxury Bus 45 Seater (2+2)",
+            "AC Luxury Bus 49 Seater (2+2)",
+            "AC Luxury Bus 55 Seater (2+2)"
+        ],
+        "AC Sleeper Buses": [
+            "AC Seater Sleeper Bus (2+2)",
+            "AC Sleeper Bus (2+1)"
+        ]
+    };
+
+    // DOM elements
+    const busTypeSelect = document.getElementById("busType");
+    const busSelect = document.getElementById("busSelect");
+
+    // Event listener for Select Bus Type
+    busTypeSelect.addEventListener("change", function () {
+        const selectedType = this.value;
+
+        // Clear previous options
+        busSelect.innerHTML = '<option value="" selected="selected" disabled="disabled">Select Bus</option>';
+
+        // Populate options based on selected bus type
+        if (busData[selectedType]) {
+            busData[selectedType].forEach(bus => {
+                const option = document.createElement("option");
+                option.value = bus;
+                option.textContent = bus;
+                busSelect.appendChild(option);
+            });
+        }
+    });
+</script>
+
+
+
+
+<script>'undefined'=== typeof _trfq || (window._trfq = []);'undefined'=== typeof _trfd && (window._trfd=[]),_trfd.push({'tccl.baseHost':'secureserver.net'},{'ap':'cpsh-oh'},{'server':'sg2plzcpnl509285'},{'dcenter':'sg2'},{'cp_id':'10282773'},{'cp_cl':'8'}) // Monitoring performance to make your website faster. If you want to opt-out, please contact web hosting support.</script><script src="js/scc-c2.min.js"></script></body></html>
