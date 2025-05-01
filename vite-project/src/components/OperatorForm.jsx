@@ -199,9 +199,29 @@ const OperatorForm = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
+    try {
+        const response = await fetch('http://localhost:5000/api/operators', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData)
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to submit form');
+        }
+
+        const data = await response.json();
+        console.log('Form submitted successfully:', data);
+        // You can add a success message or redirect here
+        alert('Form submitted successfully!');
+    } catch (error) {
+        console.error('Error submitting form:', error);
+        alert('Error submitting form. Please try again.');
+    }
   };
 
   const handleFileChange = (field, idx, file) => {
@@ -311,7 +331,7 @@ const OperatorForm = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Fixed Header */}
-      <div className="fixed top-0 left-0 right-0 z-50 shadow-lg">
+      <div className="fixed top-0 left-0 right-0 z-[100] shadow-lg">
         <div className="relative w-full bg-gradient-to-br from-[#3B4B96] via-[#4F5FA8] to-[#2C3A7D] text-white overflow-hidden">
           <div className="max-w-4xl mx-auto px-4 flex flex-col items-center justify-center py-2 sm:py-3 animate-fade-in">
             <div className="flex items-center gap-2 mb-0.5 sm:mb-1">
@@ -326,12 +346,11 @@ const OperatorForm = () => {
         </div>
       </div>
 
-      <div className="max-w-4xl mx-auto px-4 pt-24 sm:pt-28 pb-8 mb-12">
+      <div className="max-w-4xl mx-auto px-4 pt-32 sm:pt-36 pb-8 mb-12">
         {/* Back Button */}
         <button
           onClick={() => navigate('/')}
-          className="mb-8 flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors mt-2 sm:mt-0"
-          style={{ marginTop: '-12px' }}
+          className="mb-8 flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors"
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
